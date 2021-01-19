@@ -1,0 +1,169 @@
+Wed 30 Dec 2020 08:49:25 PM CET
+
+sudo bash -c exit 0
+
+DEBIAN_FRONTEND=noninteractive sudo apt-get install python3-virtualenv
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  python3-virtualenv
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 58.1 kB of archives.
+After this operation, 140 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 python3-virtualenv all 15.1.0+ds-2 [58.1 kB]
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend requires a screen at least 13 lines tall and 31 columns wide.)
+debconf: falling back to frontend: Readline
+Fetched 58.1 kB in 0s (202 kB/s)
+Selecting previously unselected package python3-virtualenv.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 34531 files and directories currently installed.)
+Preparing to unpack .../python3-virtualenv_15.1.0+ds-2_all.deb ...
+Unpacking python3-virtualenv (15.1.0+ds-2) ...
+Setting up python3-virtualenv (15.1.0+ds-2) ...
+
+python3 -m venv venv
+The virtual environment was not created successfully because ensurepip is not
+available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.
+
+    apt-get install python3-venv
+
+You may need to use sudo with that command.  After installing the python3-venv
+package, recreate your virtual environment.
+
+Failing command: ['/home/koa/git/DerKoa/ansible-pip-installer/venv/bin/python3', '-Im', 'ensurepip', '--upgrade', '--default-pip']
+
+--------------------
+
+Wed 30 Dec 2020 08:51:14 PM CET
+
+sudo bash -c exit 0
+
+DEBIAN_FRONTEND=noninteractive sudo apt-get install python3-venv
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  python3.7-venv
+The following NEW packages will be installed:
+  python3-venv python3.7-venv
+0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+Need to get 7,328 B of archives.
+After this operation, 44.0 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Wed 30 Dec 2020 08:55:23 PM CET
+
+sudo bash -c exit 0
+
+DEBIAN_FRONTEND=noninteractive sudo apt-get install python3-venv -y
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  python3.7-venv
+The following NEW packages will be installed:
+  python3-venv python3.7-venv
+0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+Need to get 7,328 B of archives.
+After this operation, 44.0 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 python3.7-venv amd64 3.7.3-2+deb10u2 [6,148 B]
+Get:2 http://deb.debian.org/debian buster/main amd64 python3-venv amd64 3.7.3-1 [1,180 B]
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend requires a screen at least 13 lines tall and 31 columns wide.)
+debconf: falling back to frontend: Readline
+Fetched 7,328 B in 0s (21.2 kB/s)
+Selecting previously unselected package python3.7-venv.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 34531 files and directories currently installed.)
+Preparing to unpack .../python3.7-venv_3.7.3-2+deb10u2_amd64.deb ...
+Unpacking python3.7-venv (3.7.3-2+deb10u2) ...
+Selecting previously unselected package python3-venv.
+Preparing to unpack .../python3-venv_3.7.3-1_amd64.deb ...
+Unpacking python3-venv (3.7.3-1) ...
+Setting up python3.7-venv (3.7.3-2+deb10u2) ...
+Setting up python3-venv (3.7.3-1) ...
+Processing triggers for man-db (2.8.5-2) ...
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+python3 -m pip install --upgrade pip
+Cache entry deserialization failed, entry ignored
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/54/eb/4a3642e971f404d69d4f6fa3885559d67562801b99d7592487f1ecc4e017/pip-20.3.3-py2.py3-none-any.whl (1.5MB)
+Installing collected packages: pip
+  Found existing installation: pip 18.1
+    Uninstalling pip-18.1:
+      Successfully uninstalled pip-18.1
+Successfully installed pip-20.3.3
+
+python3 -m pip install wheel
+Collecting wheel
+  Downloading wheel-0.36.2-py2.py3-none-any.whl (35 kB)
+Installing collected packages: wheel
+Successfully installed wheel-0.36.2
+
+python3 -m pip install -r requirements.txt
+Collecting ansible==2.10.4
+  Downloading ansible-2.10.4.tar.gz (28.6 MB)
+Collecting ansible-lint==4.3.7
+  Downloading ansible_lint-4.3.7-py2.py3-none-any.whl (79 kB)
+Collecting yamllint==1.25.0
+  Downloading yamllint-1.25.0-py2.py3-none-any.whl (60 kB)
+Requirement already satisfied: setuptools in ./venv/lib/python3.7/site-packages (from yamllint==1.25.0->-r requirements.txt (line 3)) (40.8.0)
+Collecting ansible-base<2.11,>=2.10.3
+  Downloading ansible-base-2.10.4.tar.gz (5.7 MB)
+Collecting pathspec>=0.5.3
+  Downloading pathspec-0.8.1-py2.py3-none-any.whl (28 kB)
+Collecting ruamel.yaml<1,>=0.15.37
+  Downloading ruamel.yaml-0.16.12-py2.py3-none-any.whl (111 kB)
+Collecting ruamel.yaml.clib>=0.1.2
+  Downloading ruamel.yaml.clib-0.2.2-cp37-cp37m-manylinux1_x86_64.whl (547 kB)
+Collecting cryptography
+  Downloading cryptography-3.3.1-cp36-abi3-manylinux2010_x86_64.whl (2.6 MB)
+Collecting cffi>=1.12
+  Downloading cffi-1.14.4-cp37-cp37m-manylinux1_x86_64.whl (402 kB)
+Collecting six>=1.4.1
+  Using cached six-1.15.0-py2.py3-none-any.whl (10 kB)
+Collecting jinja2
+  Using cached Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
+Collecting MarkupSafe>=0.23
+  Using cached MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl (27 kB)
+Collecting packaging
+  Downloading packaging-20.8-py2.py3-none-any.whl (39 kB)
+Collecting pyparsing>=2.0.2
+  Using cached pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+Collecting pycparser
+  Using cached pycparser-2.20-py2.py3-none-any.whl (112 kB)
+Collecting pyyaml
+  Using cached PyYAML-5.3.1-cp37-cp37m-linux_x86_64.whl
+Collecting rich
+  Downloading rich-9.6.0-py3-none-any.whl (182 kB)
+Collecting colorama<0.5.0,>=0.4.0
+  Downloading colorama-0.4.4-py2.py3-none-any.whl (16 kB)
+Collecting commonmark<0.10.0,>=0.9.0
+  Downloading commonmark-0.9.1-py2.py3-none-any.whl (51 kB)
+Collecting pygments<3.0.0,>=2.6.0
+  Downloading Pygments-2.7.3-py3-none-any.whl (950 kB)
+Collecting typing-extensions
+  Downloading typing_extensions-3.7.4.3-py3-none-any.whl (22 kB)
+Building wheels for collected packages: ansible, ansible-base
+  Building wheel for ansible (setup.py): started
+  Building wheel for ansible (setup.py): finished with status 'done'
+  Created wheel for ansible: filename=ansible-2.10.4-py3-none-any.whl size=47089993 sha256=001f862066849cfb3bfd2204607d59cae85c41f039b787eff19df035e3cb66a1
+  Stored in directory: /home/koa/.cache/pip/wheels/af/ef/06/79eb641f1994850f9b77600ce2c8e193e8112cd6ff0f9da5a1
+  Building wheel for ansible-base (setup.py): started
+  Building wheel for ansible-base (setup.py): finished with status 'done'
+  Created wheel for ansible-base: filename=ansible_base-2.10.4-py3-none-any.whl size=1868521 sha256=0ce81d7ddd4c3a2b824f082f1d89a1b4c5c87bd7fafa58fd8ef1527d4aecf0d0
+  Stored in directory: /home/koa/.cache/pip/wheels/bf/e3/c7/f9a50b33b0040921caad3d9b6f52e81a7b6e01e7bdf681bcfd
+Successfully built ansible ansible-base
+Installing collected packages: pycparser, six, pyparsing, MarkupSafe, cffi, pyyaml, packaging, jinja2, cryptography, typing-extensions, ruamel.yaml.clib, pygments, commonmark, colorama, ansible-base, ruamel.yaml, rich, pathspec, ansible, yamllint, ansible-lint
+Successfully installed MarkupSafe-1.1.1 ansible-2.10.4 ansible-base-2.10.4 ansible-lint-4.3.7 cffi-1.14.4 colorama-0.4.4 commonmark-0.9.1 cryptography-3.3.1 jinja2-2.11.2 packaging-20.8 pathspec-0.8.1 pycparser-2.20 pygments-2.7.3 pyparsing-2.4.7 pyyaml-5.3.1 rich-9.6.0 ruamel.yaml-0.16.12 ruamel.yaml.clib-0.2.2 six-1.15.0 typing-extensions-3.7.4.3 yamllint-1.25.0
+
+ansible-galaxy collection install -p .ansible/collections -r requirements.yml
+Skipping install, no requirements found
+
+ansible-galaxy role install -r requirements.yml
+Skipping install, no requirements found
+--------------------
+

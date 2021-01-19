@@ -1,0 +1,11 @@
+---
+all:
+  hosts:
+    h2917939.stratoserver.net:
+  children:
+    linux_servers:
+      hosts:
+        h2917939.stratoserver.net:
+    minecraft_servers:
+      hosts:
+        h2917939.stratoserver.net:

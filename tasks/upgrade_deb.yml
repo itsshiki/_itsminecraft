@@ -1,0 +1,16 @@
+---
+
+- name: upgrade packages
+  apt:
+    update_cache: true
+    upgrade: dist
+
+- name: check if reboot is needed
+  register: reboot_required
+  stat:
+    path: /var/run/reboot-required
+
+- name: signal that a reboot is needed
+  debug:
+    msg: "!!!!! System needs a reboot to complete all updates !!!!!"
+  when: reboot_required.stat.exists

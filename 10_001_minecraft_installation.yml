@@ -1,0 +1,89 @@
+---
+- name: Preparations for Minecraft server
+  hosts: minecraft_servers
+  tasks:
+    - name: add group minecraft
+      group:
+        name: minecraft
+        state: present
+        gid: 3000
+    - name: add user minecraft
+      user:
+        name: minecraft
+        state: present
+        shell: /bin/bash
+        uid: 3000
+        groups: minecraft
+        append: true
+    - name: Install OpenJDK 11
+      package:
+        name: "{{ package }}"
+        state: present
+        update_cache: true
+      loop:
+        - openjdk-11-jdk
+      loop_control:
+        loop_var: package
+    - name: Create directory for Minecraft und mcrcon
+      file:
+        path: "/opt/{{ d }}"
+        group: minecraft
+        state: directory
+        mode: 0770
+        owner: minecraft
+      loop:
+        - minecraft
+        - mcrcon
+      loop_control:
+        loop_var: d
+    - name: Download mcrcon
+      unarchive:
+        src: https://github.com/Tiiffi/mcrcon/releases/download/v0.7.1/mcrcon-0.7.1-linux-x86-64.tar.gz
+        dest: /tmp
+        remote_src: true
+    - name: Copy mcrcon to it's desired directory
+      copy:
+        remote_src: yes
+        src: /tmp/mcrcon-0.7.1-linux-x86-64/mcrcon
+        dest: /opt/mcrcon/
+        owner: minecraft
+        group: minecraft
+        mode: 0770
+        backup: true
+    - name: Download PaperMC
+      get_url:
+        dest: /opt/minecraft/paper.jar
+        url: "https://papermc.io/api/v2/projects/paper/versions/{{ minecraft_version }}/builds/{{ minecraft_papermc_build }}/downloads/paper-{{ minecraft_version }}-{{ minecraft_papermc_build }}.jar"
+        backup: true
+    - name: Accepting EULA
+      copy:
+        src: eula.txt
+        dest: /opt/minecraft/eula.txt
+        owner: minecraft
+        group: minecraft
+    - name: Fix owner and group for minecraft related directories recursively
+      file:
+        path: "/opt/{{ d }}"
+        group: minecraft
+        owner: minecraft
+        recurse: true
+      loop:
+        - minecraft
+        - minecraft/plugins
+        - mcrcon
+      loop_control:
+        loop_var: d
+    - name: Set DefaultTasksMax to 32000
+      lineinfile:
+        path: /etc/systemd/system.conf
+        regexp: '#DefaultTasksMax='
+        line: "DefaultTasksMax=32000"
+    - name: Copy systemd unit file for Minecraft
+      template:
+        src: minecraft.service.j2
+        dest: /etc/systemd/system/minecraft.service
+    - name: Enable the systemd unit file
+      systemd:
+        name: minecraft.service
+        enabled: true
+        daemon_reload: true

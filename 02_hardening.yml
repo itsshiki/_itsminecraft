@@ -1,0 +1,19 @@
+---
+- name: Harden SSH
+  hosts: linux_servers
+  tasks:
+    - name: Harden SSH Server
+      include_role:
+        name: devsec.hardening.ssh_hardening
+  vars:
+    ssh_use_pam: true
+    ssh_host_key_files:
+      - '/etc/ssh/ssh_host_ecdsa_key'
+      - '/etc/ssh/ssh_host_ed25519_key'
+    ssh_permit_tunnel: true
+    ssh_permit_root_login: "no"
+    ssh_allow_tcp_forwarding: true
+    ssh_allow_agent_forwarding: false
+    ssh_client_password_login: false
+    ssh_print_motd: true
+    sftp_enabled: true

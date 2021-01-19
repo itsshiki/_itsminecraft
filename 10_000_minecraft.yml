@@ -1,0 +1,19 @@
+---
+- hosts: minecraft_servers
+  tasks:
+    - name: Stop server if already installed
+      systemd:
+        name: minecraft.service
+        state: stopped
+      ignore_errors: true
+
+- import_playbook: 10_001_minecraft_installation.yml
+- import_playbook: 10_002_minecraft_plugins.yml
+- import_playbook: 10_003_minecraft_config.yml
+
+- hosts: minecraft_servers
+  tasks:
+    - name: Restart the service
+      systemd:
+        name: minecraft.service
+        state: started

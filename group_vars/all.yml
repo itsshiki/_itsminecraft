@@ -1,0 +1,30 @@
+---
+# Ansible version to use when installing it on a target host
+ansible_version: "2.10.4"
+
+users_to_delete:
+  - ubuntu
+
+users_to_create:
+  - name: koa
+    shell: /bin/bash
+    uid: 1000
+    groups:
+      - sudo
+      - adm
+    password_hash: "$6$4DklnUfnNE3ZHKYC$Iqi.5Uk11Gy5XET0v4F/j0Wdc.8L37gZXWQsL6ozmY9hBYA4GxIjT3bOCi6YGGrG9y0t.U1KieHAWiaDS/33.."
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMex1MpYkK0E1VOKdE5VjTcDZUAdCnujFeUl/nq0Y6v9 koa@derpfoo"
+
+groups_to_create: []
+  # - name: agroup
+      # gid: 3333
+
+base_packages:
+  - curl
+  - htop
+  - vim
+  - rsync
+  - python3
+  - python3-pip
+  - wget
+  - tree

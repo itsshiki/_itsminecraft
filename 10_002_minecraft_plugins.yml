@@ -1,0 +1,21 @@
+---
+- name: Put plugins into Minecraft server
+  hosts: minecraft_servers
+  tasks:
+    - name: Download Plugins # TODO: Is a little dynamic, but could be better with a dict of plugin names with URLs! Maybe.
+      get_url:
+        dest: "/opt/minecraft/plugins/"
+        url: "{{ plugin_url }}"
+      loop:
+        - "https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar"
+        - "https://ci.lucko.me/job/LuckPerms/1232/artifact/bukkit/build/libs/LuckPerms-Bukkit-5.2.67.jar"
+        - "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/EssentialsX-2.19.0-dev+33-a8daa21.jar"
+        - "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/EssentialsXChat-2.19.0-dev+33-a8daa21.jar"
+      loop_control:
+        loop_var: plugin_url
+    - name: Fix owner and group for minecraft directory
+      file:
+        path: "/opt/minecraft"
+        group: minecraft
+        owner: minecraft
+        recurse: true
