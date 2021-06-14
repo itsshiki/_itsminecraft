@@ -6,6 +6,28 @@
         name: minecraft.service
         state: stopped
       ignore_errors: true
+    
+#    - name: Create backup of the server software
+#      archive:
+#        path: /opt/*
+#        dest: /opt/minecraft_backup.tgz
+    
+    - name: Collecting plugin file names for deletion/upgrade
+      find:
+        paths: /opt/minecraft/plugins/
+        file_type: file
+      register: plugins_to_delete
+
+    - name: Deleting plugins
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ plugins_to_delete.files | flatten(levels=1) }}"
+
+    - name: Check if the Minecraft server is already installed
+      stat:
+        path: /etc/minecraft/paper.jar
+      register: minecraft_installation
 
 - import_playbook: 10_001_minecraft_installation.yml
 - import_playbook: 10_002_minecraft_plugins.yml

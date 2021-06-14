@@ -6,13 +6,14 @@
 Description=Minecraft server powered by Spigot
 
 [Service]
-Restart=always
+Type=simple
 User=minecraft
 Group=minecraft
 TimeoutStartSec=0
 WorkingDirectory=/opt/minecraft
 ExecStart=/usr/bin/java {{ minecraft_java_args }} -jar /opt/minecraft/paper.jar
-ExecStop=/opt/mcrcon/mcrcon -p NK5qW4Ll4H -w 5 \"say Server is restarting!\" save-all stop
+Restart=on-failure
+SuccessExitCode=143
 
 [Install]
 WantedBy=multi-user.target
