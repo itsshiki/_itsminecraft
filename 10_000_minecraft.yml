@@ -7,10 +7,10 @@
         state: stopped
       ignore_errors: true
     
-#    - name: Create backup of the server software
-#      archive:
-#        path: /opt/*
-#        dest: /opt/minecraft_backup.tgz
+    - name: Create backup of the server software
+      archive:
+        path: /opt/minecraft
+        dest: "/opt/minecraft_backup_{{ ansible_date_time.epoch }}.tgz"
     
     - name: Collecting plugin file names for deletion/upgrade
       find:
