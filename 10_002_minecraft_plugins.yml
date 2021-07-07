@@ -11,7 +11,7 @@
         - "https://ci.lucko.me/job/LuckPerms/1345/artifact/bukkit/loader/build/libs/LuckPerms-Bukkit-5.3.47.jar"
         - "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/EssentialsX-2.19.0-dev+161-3fe279e.jar"
         - "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/EssentialsXChat-2.19.0-dev+161-3fe279e.jar"
-        #- "https://ci.lucko.me/job/LuckPerms/lastStableBuild/artifact/bukkit/build/libs/*zip*/LuckPerms.zip"
+        #- "https://ci.lucko.me/job/LuckPerms/lastStableBuild/artifact/bukkit/loader/build/libs/*zip*/LuckPerms.zip"
         #- "https://ci.ender.zone/job/EssentialsX/lastStableBuild/artifact/jars/*zip*/EssentialsX.zip"
       loop_control:
         loop_var: plugin_url
