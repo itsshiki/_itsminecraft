@@ -8,4 +8,4 @@
     # EssentialsX https://ci.ender.zone/job/EssentialsX/lastStableBuild/artifact/jars/*zip*/EssentialsX.zip
     # Vault (get newest version) curl -s https://api.github.com/repos/MilkBowl/Vault/releases| grep tag_name| head -1| cut -d '"' -f 4
 
-3 - Put HAProxy in front of Minecraft for possibility of monitoring connection problems or DDoS attempts
+3 - Put HAProxy in front of Minecraft for possibility of monitoring connection problems or DDoS attempts or run multiple servers at once (for dev purpose e.g.)
