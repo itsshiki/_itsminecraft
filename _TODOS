@@ -3,7 +3,7 @@
     # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 73C3DB2A
     # apt update; apt install oracle-java16-installer --install-recommends
 
-2 - Possibility to download plugins in zip files with the possibility to use only some of the plugins in the archive
+2 - Possibility to download plugins in zip files with the possibility to use only some of the plugins in the archive - ALSO DONE AWESOME!!!!!!
     # LuckPerms https://ci.lucko.me/job/LuckPerms/lastStableBuild/artifact/bukkit/loader/build/libs/*zip*/LuckPerms.zip
     # EssentialsX https://ci.ender.zone/job/EssentialsX/lastStableBuild/artifact/jars/*zip*/EssentialsX.zip
     # Vault (get newest version) curl -s https://api.github.com/repos/MilkBowl/Vault/releases| grep tag_name| head -1| cut -d '"' -f 4
