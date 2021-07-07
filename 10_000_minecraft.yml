@@ -10,7 +10,7 @@
     - name: Create backup of the server software
       archive:
         path: /opt/minecraft
-        dest: "/opt/minecraft_backup_{{ ansible_date_time.epoch }}.tgz"
+        dest: "/opt/minecraft_backup_{{ ansible_date_time.date | replace('-','') }}_{{ ansible_date_time.time | replace(':','') }}.tgz"
 
 - import_playbook: 10_001_minecraft_installation.yml
 - import_playbook: 10_002_minecraft_plugins.yml
