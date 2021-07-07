@@ -2,19 +2,51 @@
 - name: Put plugins into Minecraft server
   hosts: minecraft_servers
   tasks:
-    - name: Download Plugins # TODO: Is a little dynamic, but could be better with a dict of plugin names with URLs! Maybe.
+    - name: Download plugin jar files
       get_url:
         dest: "/opt/minecraft/plugins/"
         url: "{{ plugin_url }}"
       loop:
         - "https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar"
-        - "https://ci.lucko.me/job/LuckPerms/1345/artifact/bukkit/loader/build/libs/LuckPerms-Bukkit-5.3.47.jar"
-        - "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/EssentialsX-2.19.0-dev+161-3fe279e.jar"
-        - "https://ci.ender.zone/job/EssentialsX/lastSuccessfulBuild/artifact/jars/EssentialsXChat-2.19.0-dev+161-3fe279e.jar"
-        #- "https://ci.lucko.me/job/LuckPerms/lastStableBuild/artifact/bukkit/loader/build/libs/*zip*/LuckPerms.zip"
-        #- "https://ci.ender.zone/job/EssentialsX/lastStableBuild/artifact/jars/*zip*/EssentialsX.zip"
       loop_control:
         loop_var: plugin_url
+    - name: Create plugins folder in temp filesystem
+      file:
+        path: /tmp/plugins
+        state: directory
+    - name: Download plugin archives
+      get_url:
+        dest: "/tmp/plugins"
+        url: "{{ plugin_url }}"
+      loop:
+        - "https://ci.lucko.me/job/LuckPerms/lastStableBuild/artifact/bukkit/loader/build/libs/*zip*/LuckPerms.zip"
+        - "https://ci.ender.zone/job/EssentialsX/lastStableBuild/artifact/jars/*zip*/EssentialsX.zip"
+      loop_control:
+        loop_var: plugin_url
+    - name: Decompress zip archives
+      unarchive:
+        remote_src: true
+        src: "/tmp/plugins/{{ item }}.zip"
+        dest: /tmp/plugins
+        setype: jar
+      loop:
+        - "LuckPerms"
+        - "EssentialsX"
+    - name: Find all unarchived jar files
+      find:
+        paths: /tmp/plugins
+        recurse: true
+        patterns:
+          - "EssentialsX-*.jar"
+          - "EssentialsXChat-*.jar"
+          - "LuckPerms-*.jar"
+      register: minecraft_plugin_artifacts
+    - name: Copy needed plugins to it's desired path
+      copy:
+        remote_src: true
+        src: "{{ item }}"
+        dest: "/opt/minecraft/plugins/"
+      loop: "{{ minecraft_plugin_artifacts.files | map(attribute='path') | list }}"
     - name: Fix owner and group for minecraft directory
       file:
         path: "/opt/minecraft"
