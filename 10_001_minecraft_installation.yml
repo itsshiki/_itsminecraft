@@ -19,41 +19,27 @@
     # echo "deb http://ppa.launchpad.net/linuxuprising/java/ubuntu focal main" | tee /etc/apt/sources.list.d/linuxuprising-java.list
     # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 73C3DB2A
     # apt update; apt install oracle-java16-installer --install-recommends
-    - name: Install OpenJDK 17
-      package:
-        name: "{{ package }}"
+    - name: Add Oracle Java repo key
+      apt_key:
+        keyserver: hkp://keyserver.ubuntu.com:80
+        id: 73C3DB2A
+    - name: Add Oracle Java repository
+      apt_repository:
+        repo: "deb http://ppa.launchpad.net/linuxuprising/java/ubuntu focal main"
         state: present
+    - name: Install Java
+      package:
+        name: oracle-java16-installer
+        state: present
+        install_recommends: true
         update_cache: true
-      loop:
-        - openjdk-17-jdk
-      loop_control:
-        loop_var: package
-    - name: Create directory for Minecraft und mcrcon
+    - name: Create directory for Minecraft
       file:
-        path: "/opt/{{ d }}"
+        path: "/opt/minecraft"
         group: minecraft
         state: directory
         mode: 0770
         owner: minecraft
-      loop:
-        - minecraft
-        - mcrcon
-      loop_control:
-        loop_var: d
-    - name: Download mcrcon
-      unarchive:
-        src: https://github.com/Tiiffi/mcrcon/releases/download/v0.7.1/mcrcon-0.7.1-linux-x86-64.tar.gz
-        dest: /tmp
-        remote_src: true
-    - name: Copy mcrcon to it's desired directory
-      copy:
-        remote_src: true
-        src: /tmp/mcrcon-0.7.1-linux-x86-64/mcrcon
-        dest: /opt/mcrcon/
-        owner: minecraft
-        group: minecraft
-        mode: 0770
-        backup: true
     - name: Delete PaperMC jar
       file:
         path: /opt/minecraft/paper.jar
@@ -78,7 +64,6 @@
       loop:
         - minecraft
         - minecraft/plugins
-        - mcrcon
       loop_control:
         loop_var: d
     - name: Set DefaultTasksMax to 32000
