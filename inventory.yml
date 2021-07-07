@@ -2,12 +2,10 @@
 all:
   hosts:
     h2917939.stratoserver.net:
-    smolboii.fritz.box:
   children:
     linux_servers:
       hosts:
         h2917939.stratoserver.net:
-        smolboii.fritz.box:
     minecraft_servers:
       hosts:
         h2917939.stratoserver.net:
