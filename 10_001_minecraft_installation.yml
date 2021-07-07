@@ -15,10 +15,6 @@
         uid: 3000
         groups: minecraft
         append: true
-    # TODO: OpenJDK 17 is too new! Version 16 is needed, but not in Debian repositories; implement Oracle Java 16 instead
-    # echo "deb http://ppa.launchpad.net/linuxuprising/java/ubuntu focal main" | tee /etc/apt/sources.list.d/linuxuprising-java.list
-    # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 73C3DB2A
-    # apt update; apt install oracle-java16-installer --install-recommends
     - name: Add Oracle Java repo key
       apt_key:
         keyserver: hkp://keyserver.ubuntu.com:80
