@@ -2,6 +2,18 @@
 - name: Put plugins into Minecraft server
   hosts: minecraft_servers
   tasks:
+    - name: Collecting plugin file names for deletion/upgrade
+      find:
+        paths: /opt/minecraft/plugins/
+        file_type: file
+      register: plugins_to_delete
+
+    - name: Deleting plugins
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ plugins_to_delete.files | flatten(levels=1) }}"
+
     - name: Download plugin jar files
       get_url:
         dest: "/opt/minecraft/plugins/"
