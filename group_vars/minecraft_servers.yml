@@ -1,4 +1,16 @@
 ---
-minecraft_version: "1.16.5"
-minecraft_papermc_build: "777"
+base_packages:
+  - curl
+  - htop
+  - vim
+  - rsync
+  - python3
+  - python3-pip
+  - wget
+  - tree
+  - unzip
+  - haproxy
+
+minecraft_version: "empty"
+minecraft_papermc_build: ""
 minecraft_java_args: ""
