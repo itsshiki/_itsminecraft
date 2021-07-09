@@ -1,6 +1,6 @@
 ---
 # Ansible version to use when installing it on a target host
-ansible_version: "2.10.4"
+ansible_version: "4.2.0"
 
 users_to_delete:
   - ubuntu
@@ -28,3 +28,4 @@ base_packages:
   - python3-pip
   - wget
   - tree
+  - unzip
