@@ -2,10 +2,13 @@
 all:
   hosts:
     h2917939.stratoserver.net:
+    mctest.fritz.box:
   children:
     linux_servers:
       hosts:
         h2917939.stratoserver.net:
+        mctest.fritz.box:
     minecraft_servers:
       hosts:
         h2917939.stratoserver.net:
+        mctest.fritz.box:
