@@ -15,6 +15,17 @@
         uid: 3000
         groups: minecraft
         append: true
+    - name: Copy haproxy config to system
+      copy:
+        src: haproxy.cfg
+        dest: /etc/haproxy/
+        backup: true
+      register: haproxy_config
+    - name: Restart haproxy if config has changed
+      systemd:
+        name: haproxy
+        state: restarted
+      when: haproxy_config.changed
     - name: Add Oracle Java repo key
       apt_key:
         keyserver: hkp://keyserver.ubuntu.com:80
