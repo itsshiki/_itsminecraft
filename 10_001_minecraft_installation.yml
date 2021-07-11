@@ -34,6 +34,12 @@
       apt_repository:
         repo: "deb http://ppa.launchpad.net/linuxuprising/java/ubuntu focal main"
         state: present
+    - name: Accept Oracle EULA
+      debconf:
+        name: shared
+        question: shared/accepted-oracle-license-v1-2
+        value: true
+        vtype: boolean
     - name: Install Java
       package:
         name: oracle-java16-installer
