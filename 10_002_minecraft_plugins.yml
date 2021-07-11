@@ -49,6 +49,7 @@
         patterns:
           - "EssentialsX-*.jar"
           - "EssentialsXChat-*.jar"
+          - "EssentialsXDiscord-*.jar"
           - "LuckPerms-*.jar"
       register: minecraft_plugin_artifacts
     - name: Copy needed plugins to it's desired path

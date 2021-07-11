@@ -1,0 +1,100 @@
+###
+#
+# {{ ansible_managed }}
+#
+###
+
+token: "{{ minecraft_plugin_ess_discord_token }}"
+guild: {{ minecraft_plugin_ess_discord_server_id }}
+
+channels:
+  primary: {{ minecraft_plugin_ess_discord_channel_id_primary }}
+  staff: {{ minecraft_plugin_ess_discord_channel_id_staff }}
+always-receive-primary: false
+
+chat:
+  discord-max-length: 2000
+  filter-newlines: true
+  discord-filter: "^[!?]"
+  show-webhook-messages: false
+  show-bot-messages: false
+  show-all-chat: false
+  relay-to-console: []
+
+console:
+  channel: {{ minecraft_plugin_ess_discord_channel_id_command }}
+  format: "{{ minecraft_plugin_ess_discord_channel_command_format }}"
+  webhook-name: "{{ minecraft_plugin_ess_discord_channel_command_webhook_name }}"
+  command-relay: {{ minecraft_plugin_ess_discord_channel_command_command_relay }}
+  log-level: {{ minecraft_plugin_ess_discord_channel_command_log_level }}
+
+message-types:
+  join: primary
+  leave: primary
+  chat: primary
+  death: primary
+  afk: primary
+  advancement: primary
+  server-start: primary
+  server-stop: primary
+  kick: staff
+  mute: staff
+
+show-avatar: {{ minecraft_plugin_ess_discord_show_avatar }}
+avatar-url: "https://crafthead.net/helm/{uuid}"
+show-name: false
+show-displayname: {{ minecraft_plugin_ess_discord_show_display_name }}
+vanish-fake-join-leave: true
+vanish-hide-messages: true
+
+commands:
+  execute:
+    enabled: true
+    hide-command: true
+    allowed-roles:
+      - "Admins"
+      - "123456789012345678"
+  msg:
+    enabled: true
+    hide-command: true
+    allowed-roles:
+      - "*"
+    admin-roles:
+      - "Admins"
+      - "123456789012345678"
+  list:
+    enabled: true
+    hide-command: true
+    allowed-roles:
+      - "*"
+    admin-roles:
+      - "Admins"
+      - "123456789012345678"
+
+show-discord-attachments: true
+permit-formatting-roles:
+  - "Admins"
+  - "Color Codes"
+
+presence:
+  status: {{ minecraft_plugin_ess_discord_presence_status }}
+  activity: "{{ minecraft_plugin_ess_discord_presence_activity }}"
+  message: "{{ minecraft_plugin_ess_discord_presence_message }}"
+
+messages:
+  discord-to-mc: "{{ minecraft_plugin_ess_discord_messages_dc_to_mc }}"
+  mc-to-discord: "{{ minecraft_plugin_ess_discord_messages_mc_to_dc }}"
+  temporary-mute: "{controllerdisplayname} has muted player {displayname} for {time}."
+  temporary-mute-reason: "{controllerdisplayname} has muted player {displayname} for {time}. Reason: {reason}."
+  permanent-mute: "{controllerdisplayname} has muted player {displayname}."
+  permanent-mute-reason: "{controllerdisplayname} has permanently muted player {displayname}. Reason: {reason}."
+  unmute: "{displayname} unmuted."
+  join: ":arrow_right: {displayname} has joined!"
+  quit: ":arrow_left: {displayname} has left!"
+  death: ":skull: {deathmessage}"
+  afk: ":person_walking: {displayname} is now AFK!"
+  un-afk: ":keyboard: {displayname} is no longer AFK!"
+  advancement: ":medal: {displayname} has completed the advancement **{advancement}**!"
+  server-start: ":white_check_mark: The server has started!"
+  server-stop: ":octagonal_sign: The server has stopped!"
+  kick: "{displayname} was kicked with reason: {reason}"

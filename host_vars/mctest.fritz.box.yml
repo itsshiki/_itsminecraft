@@ -1,8 +1,31 @@
 ---
 minecraft_version: "1.17.1"
-minecraft_papermc_build: "94"
+minecraft_papermc_build: "99"
 minecraft_java_args: "-Xms2G -Xmx2G -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=50 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:InitiatingHeapOccupancyPercent=10 -XX:G1MixedGCLiveThresholdPercent=50"
 minecraft_plugins:
   - EssentialsX
   - EssentialsXChat
   - Vault
+minecraft_plugin_ess_discord_token: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  66363863396562383139653131623763306465363634336266363566383536376637343232646562
+  6239643139643237323932323839313735316536663637390a633437316365303531646566353036
+  62653762646334656261333665353066363164346465316361626161643134633236363034333462
+  6530633336343038350a313837616462366466393032633637363132366365313463363637616562
+  32313435393937306531316561363862666634613966613166373762363164666537666537653665
+  38333266383234323538356665646138303633666435313439303031346336653131306337383661
+  623030663961333637363163323035353937
+minecraft_plugin_ess_discord_server_id: "550391576610996285"
+minecraft_plugin_ess_discord_channel_id_primary: "863716313330352148"
+minecraft_plugin_ess_discord_channel_id_command: "863724312342429696"
+minecraft_plugin_ess_discord_channel_command_format: "[{timestamp} {level}] {message}"
+minecraft_plugin_ess_discord_channel_command_webhook_name: "CLI"
+minecraft_plugin_ess_discord_channel_command_command_relay: "true"
+minecraft_plugin_ess_discord_channel_command_log_level: "info"
+minecraft_plugin_ess_discord_show_avatar: "true"
+minecraft_plugin_ess_discord_show_display_name: "true"
+minecraft_plugin_ess_discord_presence_status: "online"
+minecraft_plugin_ess_discord_presence_activity: "playing"
+minecraft_plugin_ess_discord_presence_message: "auf nkay.online!"
+minecraft_plugin_ess_discord_messages_dc_to_mc: "&6[D] &3{color}{username}&7: &f{message}"
+minecraft_plugin_ess_discord_messages_mc_to_dc: "{message}"

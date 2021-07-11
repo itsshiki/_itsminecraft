@@ -8,6 +8,10 @@
         dest: /opt
         recursive: true
       register: updated_configs
+    - name: Deploy EssentialsXDiscord config
+      template:
+        src: essxdc_config.yml.j2
+        dest: /opt/minecraft/plugins/EssentialsDiscord/config.yml
     - name: Fix owner and group for minecraft directory
       file:
         path: /opt/minecraft
