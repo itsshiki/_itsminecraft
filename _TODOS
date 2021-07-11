@@ -1,13 +1,15 @@
-4 - Playbook for the server itself so it creates backups on it's own (serer stop, backup creating, server start) with a daily cron and a cleanup after a number of backups
+4 - Playbook for the server itself so it creates backups on it's own (server stop, backup creation, server start) with a daily cron and a cleanup after a number of backups
 
-5 - Define a list with plugins to use those instead of static links
+5 - Define a list with plugins to use those instead of static links in plugins playbook
 
 6 - Extend backup playbook so it updates the server automaically (should I really do this?)
 
-7 - EssentialsXDiscord - how does it work?
+DONE - 7 - EssentialsXDiscord with config
 
 8 - Simplify plugins playbook (move all plugins at once e.g.)
 
-9 - BUG - Not possible to initial install java since it needs an interactive shell
+DONE - 9 - BUG - Not possible to initial install java since it needs an interactive shell
 
 10 - Remove archive usage for faster progressing of the playbook and better overview
+
+11 - Move backups to my OneDrive (Creds to the vault!)
