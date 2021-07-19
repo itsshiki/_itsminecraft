@@ -14,6 +14,7 @@ default:
   - essentials.afk.auto
   - essentials.back
   - essentials.chat.url
+  - essentials.discord.*
   - essentials.gc
   - essentials.heal
   - essentials.help
@@ -53,18 +54,27 @@ admin:
   permissions:
   - '*'
 koa:
-  permissions: []
+  permissions:
+  - essentials.build
   parents:
   - admin
 kiro:
-  permissions: []
+  permissions:
+  - essentials.build
   parents:
   - default
 kazu:
-  permissions: []
+  permissions:
+  - essentials.build
   parents:
   - default
 nao:
-  permissions: []
+  permissions:
+  - essentials.build
+  parents:
+  - default
+himmi:
+  permissions:
+  - essentials.build.interact.*
   parents:
   - default

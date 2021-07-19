@@ -4,6 +4,7 @@ ansible_version: "4.2.0"
 
 users_to_delete:
   - ubuntu
+  - pi
 
 users_to_create:
   - name: koa

@@ -16,8 +16,8 @@ minecraft_plugin_ess_discord_token: !vault |
   38333266383234323538356665646138303633666435313439303031346336653131306337383661
   623030663961333637363163323035353937
 minecraft_plugin_ess_discord_server_id: "550391576610996285"
-minecraft_plugin_ess_discord_channel_id_primary: "863716313330352148"
-minecraft_plugin_ess_discord_channel_id_command: "863724312342429696"
+minecraft_plugin_ess_discord_channel_id_primary: "863836692891828244"
+minecraft_plugin_ess_discord_channel_id_command: "863836760684494848"
 minecraft_plugin_ess_discord_channel_command_format: "[{timestamp} {level}] {message}"
 minecraft_plugin_ess_discord_channel_command_webhook_name: "CLI"
 minecraft_plugin_ess_discord_channel_command_command_relay: "true"

@@ -48,6 +48,7 @@
         recurse: true
         patterns:
           - "EssentialsX-*.jar"
+          - "EssentialsXAntiBuild-*.jar"
           - "EssentialsXChat-*.jar"
           - "EssentialsXDiscord-*.jar"
           - "LuckPerms-*.jar"

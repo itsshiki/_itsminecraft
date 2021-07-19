@@ -808,6 +808,7 @@ chat:
     kiro: '&d{DISPLAYNAME}&r: {MESSAGE}'
     kazu: '&e{DISPLAYNAME}&r: {MESSAGE}'
     nao: '&b{DISPLAYNAME}&r: {MESSAGE}'
+    himmi: '&3{DISPLAYNAME}&r: {MESSAGE}'
   #  default: '{WORLDNAME} {DISPLAYNAME}&7:&r {MESSAGE}'
   #  admins: '{WORLDNAME} &c[{GROUP}]&r {DISPLAYNAME}&7:&c {MESSAGE}'
 
@@ -982,10 +983,10 @@ protect:
     # Should people without the essentials.build permission be allowed to use items?
     # Set true to disable using for those people.
     # Setting to false means EssentialsAntiBuild will never prevent you from using items.
-    use: true
+    use: false
 
     # Should we warn people when they are not allowed to build?
-    warn-on-build-disallow: true
+    warn-on-build-disallow: false
 
   # For which block types would you like to be alerted?
   # You can find a list of items at https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html.
