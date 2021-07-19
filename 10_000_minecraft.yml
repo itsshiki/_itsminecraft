@@ -6,7 +6,7 @@
         name: minecraft.service
         state: stopped
       ignore_errors: true
-    
+
     - name: Create backup of the server software
       archive:
         path: /opt/minecraft
