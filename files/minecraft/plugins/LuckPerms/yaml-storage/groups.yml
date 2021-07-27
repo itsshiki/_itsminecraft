@@ -75,6 +75,6 @@ nao:
   - default
 himmi:
   permissions:
-  - essentials.build.interact.*
+  - essentials.build
   parents:
   - default
