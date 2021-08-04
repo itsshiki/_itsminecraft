@@ -22,8 +22,6 @@ default:
   - essentials.home
   - essentials.info
   - essentials.list
-  - essentials.mail.read
-  - essentials.mail.send
   - essentials.me
   - essentials.motd
   - essentials.msg
@@ -54,8 +52,7 @@ admin:
   permissions:
   - '*'
 koa:
-  permissions:
-  - essentials.build
+  permissions: []
   parents:
   - admin
 kiro:
@@ -75,6 +72,6 @@ nao:
   - default
 himmi:
   permissions:
-  - essentials.build.interact.*
+  - essentials.build
   parents:
   - default
