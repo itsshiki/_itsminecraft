@@ -13,3 +13,5 @@ DONE - 9 - BUG - Not possible to initial install java since it needs an interact
 10 - Remove archive usage for faster progressing of the playbook and better overview
 
 11 - Move backups to my OneDrive (Creds to the vault!)
+
+12 - Move home of minecraft user to /opt/minecraft (with bashrc and stuff) and the server software into a subdirectory
