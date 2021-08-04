@@ -18,7 +18,7 @@
 
 - hosts: minecraft_servers
   tasks:
-    - name: Start the service (again)
+    - name: Start the Minecraft Server service
       systemd:
         name: minecraft.service
         state: started
