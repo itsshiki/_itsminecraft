@@ -88,6 +88,10 @@
       template:
         src: minecraft.service.j2
         dest: /etc/systemd/system/minecraft.service
+    - name: Copy systemd socket file for Minecraft service
+      copy:
+        src: minecraft.socket
+        dest: /etc/systemd/system/
     - name: Enable the systemd unit file
       systemd:
         name: minecraft.service

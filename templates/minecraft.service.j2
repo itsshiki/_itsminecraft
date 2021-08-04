@@ -1,9 +1,9 @@
 #
-#{{ ansible_managed }}
+# {{ ansible_managed }}
 #
 
 [Unit]
-Description=Minecraft server powered by Spigot
+Description=Minecraft Server (PaperMC)
 
 [Service]
 Type=simple
@@ -11,8 +11,15 @@ User=minecraft
 Group=minecraft
 TimeoutStartSec=0
 WorkingDirectory=/opt/minecraft
-ExecStart=/usr/bin/java {{ minecraft_java_args }} -jar /opt/minecraft/paper.jar
+ExecStart=/bin/sh -c "java {{ minecraft_java_args }} -jar /opt/minecraft/paper.jar nogui </run/minecraft.control"
+ExecStop=/bin/sh -c "echo stop > /run/minecraft.control"
 Restart=on-failure
+RestartSec=5min
+Sockets=minecraft.socket
+KillSignal=SIGCONT
+StandardInput=socket
+StandardOutput=journal
+StandardError=journal
 SuccessExitStatus=143
 
 [Install]
