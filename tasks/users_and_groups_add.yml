@@ -1,0 +1,33 @@
+---
+
+- name: add groups
+  group:
+      name: "{{ g.name }}"
+      state: present
+      gid: "{{ g.gid | default(omit) }}"
+  loop: "{{ groups_to_create }}"
+  loop_control:
+    loop_var: g
+
+- name: add users
+  user:
+    name: "{{ u.name }}"
+    shell: "{{ u.shell | default('/bin/bash') }}"
+    uid: "{{ u.uid | default(omit) }}"
+    password: "{{ u.password_hash | default(omit) }}"
+    groups: "{{ u.groups  | default(omit) }}"
+    append: true
+  loop: "{{ users_to_create }}"
+  loop_control:
+    loop_var: u
+  no_log: true
+
+- name: deploy SSH Key for users
+  authorized_key:
+    user: "{{ u.name }}"
+    state: present
+    key: "{{ u.key | default('dummy==') }}"
+    exclusive: true
+  loop: "{{ users_to_create }}"
+  loop_control:
+    loop_var: u

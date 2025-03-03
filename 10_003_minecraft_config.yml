@@ -1,0 +1,16 @@
+---
+- name: Configs for Minecraft server and plugins
+  hosts: minecraft_servers
+  tasks:
+    - name: Copy server and plugin configs
+      synchronize:
+        src: minecraft
+        dest: /opt
+        recursive: true
+      register: updated_configs
+    - name: Fix owner and group for minecraft directory
+      file:
+        path: /opt/minecraft
+        group: minecraft
+        owner: minecraft
+        recurse: true

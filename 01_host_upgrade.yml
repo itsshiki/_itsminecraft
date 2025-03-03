@@ -1,0 +1,6 @@
+---
+- name: Upgrade all packages
+  hosts: all
+  tasks:
+    - import_tasks: tasks/upgrade_deb.yml
+      when: ansible_os_family == "Debian"

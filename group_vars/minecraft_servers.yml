@@ -1,0 +1,33 @@
+---
+base_packages:
+  - curl
+  - htop
+  - vim
+  - rsync
+  - python3
+  - python3-pip
+  - wget
+  - tree
+  - unzip
+  - haproxy
+
+minecraft_version: "empty"
+minecraft_papermc_build: ""
+minecraft_java_args: ""
+minecraft_plugin_urls: []
+minecraft_plugin_ess_discord_token: "PLEASE_REPLACE_ME"
+minecraft_plugin_ess_discord_server_id: "000000000000000000"
+minecraft_plugin_ess_discord_channel_id_primary: "000000000000000000"
+minecraft_plugin_ess_discord_channel_id_staff: "000000000000000000"
+minecraft_plugin_ess_discord_channel_id_command: "000000000000000000"
+minecraft_plugin_ess_discord_channel_command_format: "[{timestamp} {level}] {message}"
+minecraft_plugin_ess_discord_channel_command_webhook_name: "CLI"
+minecraft_plugin_ess_discord_channel_command_command_relay: "true"
+minecraft_plugin_ess_discord_channel_command_log_level: "info"
+minecraft_plugin_ess_discord_show_avatar: "true"
+minecraft_plugin_ess_discord_show_display_name: "true"
+minecraft_plugin_ess_discord_presence_status: "online"
+minecraft_plugin_ess_discord_presence_activity: "playing"
+minecraft_plugin_ess_discord_presence_message: ""
+minecraft_plugin_ess_discord_messages_dc_to_mc: "&6[D] &3{color}{username}&7: &f{message}"
+minecraft_plugin_ess_discord_messages_mc_to_dc: "{message}"

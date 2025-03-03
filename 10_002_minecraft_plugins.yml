@@ -1,0 +1,72 @@
+---
+- name: Put plugins into Minecraft server
+  hosts: minecraft_servers
+  tasks:
+    - name: Collecting plugin file names for deletion/upgrade
+      find:
+        paths: /opt/minecraft/plugins/
+        file_type: file
+      register: plugins_to_delete
+    - name: Deleting plugins
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ plugins_to_delete.files | flatten(levels=1) }}"
+    - name: Download plugin jar files
+      get_url:
+        dest: "/opt/minecraft/plugins/"
+        url: "{{ plugin_url }}"
+      loop:
+        - "https://github.com/MilkBowl/Vault/releases/download/1.7.3/Vault.jar"
+      loop_control:
+        loop_var: plugin_url
+    - name: Create plugins folder in temp filesystem
+      file:
+        path: /tmp/plugins
+        state: directory
+    - name: Download plugin archives
+      get_url:
+        dest: "/tmp/plugins"
+        url: "{{ plugin_url }}"
+      loop:
+        - "https://ci.lucko.me/job/LuckPerms/lastStableBuild/artifact/bukkit/loader/build/libs/*zip*/LuckPerms.zip"
+        - "https://ci.ender.zone/job/EssentialsX/lastStableBuild/artifact/jars/*zip*/EssentialsX.zip"
+      loop_control:
+        loop_var: plugin_url
+    - name: Decompress zip archives
+      unarchive:
+        remote_src: true
+        src: "/tmp/plugins/{{ item }}.zip"
+        dest: /tmp/plugins
+        setype: jar
+      loop:
+        - "LuckPerms"
+        - "EssentialsX"
+    - name: Find all unarchived jar files
+      find:
+        paths: /tmp/plugins
+        recurse: true
+        patterns:
+          - "EssentialsX-*.jar"
+          - "EssentialsXAntiBuild-*.jar"
+          - "EssentialsXChat-*.jar"
+          - "EssentialsXDiscord-*.jar"
+          - "LuckPerms-*.jar"
+      register: minecraft_plugin_artifacts
+    - name: Copy needed plugins to it's desired path
+      copy:
+        remote_src: true
+        src: "{{ item }}"
+        dest: "/opt/minecraft/plugins/"
+      loop: "{{ minecraft_plugin_artifacts.files | map(attribute='path') | list }}"
+    - name: Fix owner and group for minecraft directory
+      file:
+        path: "/opt/minecraft"
+        group: minecraft
+        owner: minecraft
+        recurse: true
+
+    - name: Cleanup of tmp folder
+      file:
+        path: /tmp/plugins
+        state: absent

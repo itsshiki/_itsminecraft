@@ -1,0 +1,99 @@
+---
+- name: Preparations for Minecraft server
+  hosts: minecraft_servers
+  tasks:
+    - name: add group minecraft
+      group:
+        name: minecraft
+        state: present
+        gid: 3000
+    - name: add user minecraft
+      user:
+        name: minecraft
+        state: present
+        shell: /bin/bash
+        uid: 3000
+        groups: minecraft
+        append: true
+    - name: Copy haproxy config to system
+      copy:
+        src: haproxy.cfg
+        dest: /etc/haproxy/
+        backup: true
+      register: haproxy_config
+    - name: Restart haproxy if config has changed
+      systemd:
+        name: haproxy
+        state: restarted
+      when: haproxy_config.changed
+    - name: Add Oracle Java repo key
+      apt_key:
+        keyserver: hkp://keyserver.ubuntu.com:80
+        id: 73C3DB2A
+    - name: Add Oracle Java repository
+      apt_repository:
+        repo: "deb http://ppa.launchpad.net/linuxuprising/java/ubuntu focal main"
+        state: present
+    - name: Accept Oracle EULA
+      debconf:
+        name: shared
+        question: shared/accepted-oracle-license-v1-2
+        value: true
+        vtype: boolean
+    - name: Install Java
+      package:
+        name: oracle-java16-installer
+        state: present
+        install_recommends: true
+        update_cache: true
+    - name: Create directory for Minecraft
+      file:
+        path: "/opt/minecraft"
+        group: minecraft
+        state: directory
+        mode: 0770
+        owner: minecraft
+    - name: Delete PaperMC jar
+      file:
+        path: /opt/minecraft/paper.jar
+        state: absent
+    - name: Download PaperMC
+      get_url:
+        dest: /opt/minecraft/paper.jar
+        url: "https://papermc.io/api/v2/projects/paper/versions/{{ minecraft_version }}/builds/{{ minecraft_papermc_build }}/downloads/paper-{{ minecraft_version }}-{{ minecraft_papermc_build }}.jar"
+        backup: true
+    - name: Accepting EULA
+      copy:
+        src: eula.txt
+        dest: /opt/minecraft/eula.txt
+        owner: minecraft
+        group: minecraft
+    - name: Fix owner and group for minecraft related directories recursively
+      file:
+        path: "/opt/{{ d }}"
+        group: minecraft
+        owner: minecraft
+        recurse: true
+      loop:
+        - minecraft
+        - minecraft/plugins
+      loop_control:
+        loop_var: d
+    - name: Set DefaultTasksMax to 32000
+      lineinfile:
+        path: /etc/systemd/system.conf
+        regexp: '#DefaultTasksMax='
+        line: "DefaultTasksMax=32000"
+    - name: Copy systemd unit file for Minecraft
+      template:
+        src: minecraft.service.j2
+        dest: /etc/systemd/system/minecraft.service
+    - name: Copy systemd socket file for Minecraft service
+      copy:
+        src: minecraft.socket
+        dest: /etc/systemd/system/
+    - name: Enable the systemd unit file
+      systemd:
+        name: minecraft.service
+        enabled: true
+        daemon_reload: true

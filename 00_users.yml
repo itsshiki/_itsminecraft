@@ -1,0 +1,32 @@
+---
+- name: User management
+  hosts: all
+  pre_tasks:
+    - name: update package cache (Ubuntu/Debian)
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+    - name: ensure sudo is installed
+      package:
+        name: sudo
+        state: present
+
+  tasks:
+    - import_tasks: tasks/users_and_groups_add.yml
+    - name: activate passwordless sudo (Debian)
+      lineinfile:
+        path: /etc/sudoers
+        regexp: '%sudo\sALL=\(ALL:ALL\)'
+        line: "%sudo\tALL=(ALL) NOPASSWD: ALL"
+        validate: /usr/sbin/visudo -cf %s
+      when: ansible_os_family == "Debian"
+
+  post_tasks:
+    - name: remove users
+      user:
+        name: "{{ u }}"
+        state: absent
+      loop: "{{ users_to_delete }}"
+      loop_control:
+        loop_var: u

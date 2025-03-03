@@ -1,0 +1,24 @@
+---
+- hosts: minecraft_servers
+  tasks:
+    - name: Stop server if already installed
+      systemd:
+        name: minecraft.service
+        state: stopped
+      ignore_errors: true
+
+    - name: Create backup of the server software
+      archive:
+        path: /opt/minecraft
+        dest: "/opt/minecraft_backup_{{ ansible_date_time.date | replace('-','') }}_{{ ansible_date_time.time | replace(':','') }}.tgz"
+
+- import_playbook: 10_001_minecraft_installation.yml
+- import_playbook: 10_002_minecraft_plugins.yml
+- import_playbook: 10_003_minecraft_config.yml
+
+- hosts: minecraft_servers
+  tasks:
+    - name: Start the Minecraft Server service
+      systemd:
+        name: minecraft.service
+        state: started

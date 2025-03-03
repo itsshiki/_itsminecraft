@@ -1,0 +1,11 @@
+---
+all:
+  hosts:
+    testserver.example:
+  children:
+    linux_servers:
+      hosts:
+        testserver.example:
+    minecraft_servers:
+      hosts:
+        testserver.example:

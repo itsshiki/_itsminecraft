@@ -1,0 +1,39 @@
+---
+# Ansible version to use when installing it on a target host
+# The Playbooks are written with 8.5.0. Should be okay if you put anything newer here - at your own risk
+ansible_version: "8.5.0"
+
+users_to_delete: []
+# Example is following
+  - ubuntu
+  - pi
+
+# System users, not Minecraft users!
+users_to_create:
+  - name: yourusername
+    shell: /bin/bash
+    uid: 2000
+    groups:
+      - sudo
+      - adm
+    password_hash: "!!! Your password hash how it would be in /etc/shadow !!!"
+    key: "!!! Your public key for ssh !!!"
+
+# Also system groups, not for Minecraft.
+groups_to_create: []
+  # - name: agroup
+      # gid: 3333
+
+# Some packages I want or need on my Debian VM.
+base_packages:
+  # These are needed! Don't remove!
+  - python3
+  - python3-pip
+  # These ones are shikicommendations.
+  - curl
+  - htop
+  - vim
+  - rsync
+  - wget
+  - tree
+  - unzip
